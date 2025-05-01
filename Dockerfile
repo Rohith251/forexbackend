@@ -1,19 +1,19 @@
 # Build Stage
-FROM maven:3.8.4-openjdk-17-slim AS build
+FROM maven:3.8.4-eclipse-temurin-17 AS build
 WORKDIR /app
 COPY pom.xml .
 COPY src ./src
 RUN mvn clean package -DskipTests
 
 # Runtime Stage
-FROM openjdk:17-jre-slim
+FROM eclipse-temurin:17-jre
 WORKDIR /app
 COPY --from=build /app/target/*.jar app.jar
 
-# Expose application and PostgreSQL ports
-EXPOSE 5432
+# Expose application port
+EXPOSE 8081
 
-# Set PostgreSQL environment variables
+# Set PostgreSQL environment variables (Must match local setup)
 ENV DATABASE_URL=jdbc:postgresql://192.168.94.33:5432/sundaram
 ENV DATABASE_USER=postgres
 ENV DATABASE_PASSWORD=rohith
