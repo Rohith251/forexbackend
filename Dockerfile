@@ -14,7 +14,7 @@ COPY --from=build /app/target/*.jar app.jar
 EXPOSE 5432
 
 # Set PostgreSQL environment variables
-ENV DATABASE_URL=jdbc:postgresql://postgres_db:5432/sundaram
+ENV DATABASE_URL=jdbc:postgresql://192.168.94.33:5432/sundaram
 ENV DATABASE_USER=postgres
 ENV DATABASE_PASSWORD=rohith
 
