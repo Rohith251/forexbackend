@@ -4,9 +4,7 @@ pipeline {
     environment {
         DOCKER_IMAGE = 'rohith0702/forex'
         DOCKER_TAG = 'latest'
-        DOCKER_CREDENTIALS_ID = 'docker-hub-credentials'  // ID for Docker Hub credentials
-        DATABASE_URL = 'jdbc:postgresql://192.168.94.33:5432/sundaram'
-        DATABASE_CREDENTIALS_ID = 'database-credentials'  // ID for database credentials
+        DOCKER_CREDENTIALS_ID = 'docker-hub-credentials'  // The ID you gave when storing credentials in Jenkins
     }
 
     stages {
@@ -65,16 +63,6 @@ pipeline {
                 echo ' Deploying services using Docker Compose...'
                 bat 'docker-compose down || exit 0'  // Stops existing containers if running
                 bat 'docker-compose up -d'         // Starts backend app only (PostgreSQL is local)
-            }
-        }
-
-        stage('Access Database Credentials') {
-            steps {
-                echo 'Accessing database credentials...'
-                withCredentials([usernamePassword(credentialsId: "${DATABASE_CREDENTIALS_ID}", usernameVariable: 'DB_USER', passwordVariable: 'DB_PASS')]) {
-                    echo "Database Username: ${DB_USER}"
-                    // Use the database credentials for your tasks, e.g., running tests, or deploying services.
-                }
             }
         }
     }
