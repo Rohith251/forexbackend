@@ -5,7 +5,7 @@ pipeline {
         DOCKER_IMAGE = 'rohith0702/forex'
         DOCKER_TAG = 'latest'
         DOCKER_CREDENTIALS_ID = 'docker-hub-credentials'
-        DATABASE_URL = 'jdbc:postgresql://postgres_db:5432/sundaram'
+        DATABASE_URL = 'jdbc:postgresql://192.168.94.33:5432/sundaram'
         DATABASE_USER = 'postgres'
         DATABASE_PASSWORD = 'rohith'
     }
