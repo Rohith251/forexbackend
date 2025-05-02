@@ -5,6 +5,9 @@ pipeline {
         DOCKER_IMAGE = 'rohith0702/forex'
         DOCKER_TAG = 'latest'
         DOCKER_CREDENTIALS_ID = 'docker-hub-credentials'  // The ID you gave when storing credentials in Jenkins
+        DATABASE_URL = 'jdbc:postgresql://host.docker.internal:5432/sundaram'
+        DATABASE_USER = 'postgres'
+        DATABASE_PASSWORD = 'rohith'
     }
 
     stages {
@@ -61,6 +64,12 @@ pipeline {
         stage('Deploy with Docker Compose') {
             steps {
                 echo ' Deploying services using Docker Compose...'
+
+                // Print environment variables to verify them
+                echo "DATABASE_URL: ${DATABASE_URL}"
+                echo "DATABASE_USER: ${DATABASE_USER}"
+                echo "DATABASE_PASSWORD: ${DATABASE_PASSWORD}"
+
                 bat 'docker-compose down || exit 0'  // Stops existing containers if running
                 bat 'docker-compose up -d'         // Starts backend app only (PostgreSQL is local)
             }
@@ -73,8 +82,8 @@ pipeline {
         }
         cleanup {
             echo ' Cleaning up containers...'
-            bat 'docker stop backend_app || exit 0'
-            bat 'docker rm backend_app || exit 0'
+            bat 'docker stop backend_app1 || exit 0'
+            bat 'docker rm backend_app1 || exit 0'
         }
         failure {
             echo ' Build failed!'
