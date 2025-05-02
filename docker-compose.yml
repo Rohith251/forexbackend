@@ -4,11 +4,11 @@ services:
     build: .
     restart: always
     environment:
-      DATABASE_URL: jdbc:postgresql://192.168.94.33:5432/sundaram  # Uses local PostgreSQL
+      DATABASE_URL: jdbc:postgresql://192.168.94.33:5432/sundaram  # Ensure PostgreSQL is listening on 0.0.0.0
       DATABASE_USER: postgres
       DATABASE_PASSWORD: rohith
     ports:
-      - "8081:8081"
+      - "192.168.94.33:8081:8081"
     networks:
       - app_network
 
