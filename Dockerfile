@@ -13,6 +13,9 @@ COPY --from=build /app/target/*.jar app.jar
 # Expose application port
 EXPOSE 8081
 
-
+# Set environment variables (if needed for default behavior)
+ENV DATABASE_URL=jdbc:postgresql://host.docker.internal:5432/sundaram
+ENV DATABASE_USER=postgres
+ENV DATABASE_PASSWORD=rohith
 
 ENTRYPOINT ["java", "-jar", "app.jar"]
