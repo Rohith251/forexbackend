@@ -4,7 +4,7 @@ services:
     build: .
     restart: always
     environment:
-      DATABASE_URL: ${DATABASE_URL}  # Uses local PostgreSQL, replace with dynamic env variable
+      DATABASE_URL: ${DATABASE_URL}  # Set via Jenkins or locally
       DATABASE_USER: ${DATABASE_USER}
       DATABASE_PASSWORD: ${DATABASE_PASSWORD}
     ports:
