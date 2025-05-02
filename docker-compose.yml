@@ -1,12 +1,12 @@
 services:
   backend_app:
-    container_name: backend_app1
+    container_name: backend_app
     build: .
     restart: always
     environment:
-      DATABASE_URL: ${DATABASE_URL}  # Set via Jenkins or locally
-      DATABASE_USER: ${DATABASE_USER}
-      DATABASE_PASSWORD: ${DATABASE_PASSWORD}
+      DATABASE_URL: jdbc:postgresql://192.168.94.33:5432/sundaram  # Uses local PostgreSQL
+      DATABASE_USER: postgres
+      DATABASE_PASSWORD: rohith
     ports:
       - "8081:8081"
     networks:
